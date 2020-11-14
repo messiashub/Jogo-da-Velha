@@ -1,30 +1,30 @@
 
-document.addEventListener('DOMContentLoaded',()=>{
+document.addEventListener('DOMContentLoaded', () => {
     let quadrados = document.querySelectorAll(".quadrado");
 
-    quadrados.forEach((quadrado)=>{
+    quadrados.forEach((quadrado) => {
         quadrado.addEventListener('click', handleClick);
     })
 })
 
-function handleClick(event){
+function handleClick(event) {
 
     let quadrado = event.target;
     let position = quadrado.id;
-    
-    handleMove(position);
-    updateQuadrados();
+
+    if (handleMove(position)) {
+
+        setTimeout(() => {
+            alert(`O jogo acabou - O vencedor foi ${playerTime}`);
+        }, 100);
+
+    };
+    updateQuadrados(position);
 }
 
-function updateQuadrados(){
-    let quadrados = document.querySelectorAll(".quadrado");
-
-    quadrados.forEach((quadrado)=>{
-        let position = quadrado.id;
-        let simbolos = tabuleiro[position];
-
-        if(simbolos != ""){
-            quadrado.innerHTML = `<div class='${simbolos}'></div>`
-        }
-    })
+function updateQuadrados(position){
+    let quadrado = document.getElementById(position.toString());
+    let simbolos = tabuleiro[position];
+    quadrado.innerHTML = `<div class='${simbolos}'></div>`
 }
+
